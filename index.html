@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>LEJA Empleos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="bg-dark text-light">
+
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm">
+        <div class="container-fluid">
+            <!-- LOGO GRANDE -->
+            <a class="navbar-brand" href="#" data-view="home">
+                <img src="logo-leja.png" alt="LEJA Empleos" class="logo-nav">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navMain">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#" data-view="home">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-view="vacantes">Ver vacantes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-view="publicar">Publicar vacantes</a></li>
+                    <li class="nav-item d-none nav-panel"><a class="nav-link" href="#" data-view="panel">Panel</a></li>
+                    <li class="nav-item d-none nav-perfil"><a class="nav-link" href="#" data-view="perfil">Perfil</a></li>
+                </ul>
+
+                <!-- Auth (dentro del colapso para móvil) -->
+                <div class="d-flex gap-2 auth-buttons d-lg-none">
+                    <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#signupModal">Registrarte</button>
+                    <button class="btn btn-primary gradient-btn" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar sesión</button>
+                </div>
+            </div>
+
+            <!-- Auth (derecha en desktop) -->
+            <div class="d-none d-lg-flex gap-2 auth-buttons">
+                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#signupModal">Registrarte</button>
+                <button class="btn btn-primary gradient-btn" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar sesión</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4" style="margin-top:80px">
+
+        <!-- HOME -->
+        <section id="view-home" class="view active">
+            <div class="hero2 p-4 p-md-5 rounded-4">
+                <h1 class="display-5 fw-bold mb-3">Contrata con confianza. Postúlate con facilidad.</h1>
+                <p class="lead mb-4">Para personas buscando trabajo y quienes contratan: filtra, publica y gestiona.</p>
+
+                <form id="frmSearchHome" class="row g-2 searchbar">
+                    <div class="col-12 col-md-5">
+                        <input class="form-control form-control-lg" id="txtPuestoHome" placeholder="Puesto o palabra clave">
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <input class="form-control form-control-lg" id="txtUbicacionHome" placeholder="Ubicación (libre)">
+                    </div>
+                    <div class="col-12 col-md-2 d-grid">
+                        <button class="btn btn-primary btn-lg gradient-btn">Buscar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="mt-5 box">
+                <h2 class="h3 mb-3">¿Por qué esta plataforma?</h2>
+                <p>Busca, publica y gestiona vacantes en un solo lugar.</p>
+            </div>
+        </section>
+
+        <!-- VACANTES -->
+        <section id="view-vacantes" class="view">
+            <!-- buscador arriba -->
+            <div class="box mb-3">
+                <h2 class="h4 mb-3">Buscar vacantes</h2>
+                <form id="frmSearchVacantesTop" class="row g-2 searchbar">
+                    <div class="col-12 col-md-5">
+                        <input class="form-control" id="txtPuesto" placeholder="Puesto o palabra clave (ej. Auxiliar administrativa)">
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <input class="form-control" id="txtUbicacion" placeholder="Ubicación libre (opcional)">
+                    </div>
+                    <div class="col-12 col-md-2 d-grid">
+                        <button class="btn btn-primary gradient-btn" type="submit">Buscar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row g-3">
+                <!-- filtros a la izquierda -->
+                <aside class="col-12 col-lg-3">
+                    <div class="box">
+                        <h5 class="mb-3">Filtros</h5>
+
+                        <div class="mb-3">
+                            <div class="fw-semibold mb-1">Tipo de empleo</div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Tiempo completo" id="fTiempo">
+                                <label class="form-check-label" for="fTiempo">Tiempo completo</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Medio tiempo" id="fMedio">
+                                <label class="form-check-label" for="fMedio">Medio tiempo</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Remoto" id="fRemoto">
+                                <label class="form-check-label" for="fRemoto">Remoto</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="fw-semibold mb-1">Estado</div>
+                            <select id="fEstado" class="form-select"></select>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="fw-semibold mb-1">Municipio</div>
+                            <select id="fMunicipio" class="form-select" disabled>
+                                <option value="">Todos</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-2">
+                            <div class="fw-semibold mb-1">Rango salarial</div>
+                            <select class="form-select" id="fRango">
+                                <option value="0">Cualquiera</option>
+                                <option value="8000">$8,000+</option>
+                                <option value="12000">$12,000+</option>
+                                <option value="15000">$15,000+</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-outline-light btn-sm mt-2" id="btnAplicarFiltros">Aplicar filtros</button>
+                    </div>
+                </aside>
+
+                <!-- vacantes a la derecha -->
+                <section class="col-12 col-lg-9">
+                    <div class="box">
+                        <h4 class="mb-3">Vacantes</h4>
+                        <div id="listVacantes" class="vstack gap-3"></div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- PUBLICAR -->
+        <section id="view-publicar" class="view">
+            <div class="box">
+                <h4 class="mb-3">Publicar vacante</h4>
+
+                <div id="pubGate" class="mb-3">
+                    <p>Debes <strong>Iniciar sesión como Reclutador</strong> para publicar.</p>
+                    <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#signupModal">Registrarte</button>
+                    <button class="btn btn-primary gradient-btn" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar sesión</button>
+                </div>
+
+                <form id="frmPublicar" class="row g-3 d-none">
+                    <input type="hidden" id="vId">
+                    <div class="col-md-6">
+                        <label class="form-label">Título*</label>
+                        <input id="vTitulo" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Empresa*</label>
+                        <input id="vEmpresa" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Estado*</label>
+                        <select id="vEstado" class="form-select" required></select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Municipio*</label>
+                        <select id="vMunicipio" class="form-select" required disabled>
+                            <option value="">Selecciona municipio</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Tipo*</label>
+                        <select id="vTipo" class="form-select" required>
+                            <option>Tiempo completo</option>
+                            <option>Medio tiempo</option>
+                            <option>Remoto</option>
+                            <option>Prácticas</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Salario (MXN)*</label>
+                        <input id="vSalario" type="number" min="0" step="500" class="form-control" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Período*</label>
+                        <select id="vPeriodo" class="form-select" required>
+                            <option value="Mensual" selected>Mensual</option>
+                            <option value="Quincenal">Quincenal</option>
+                            <option value="Semanal">Semanal</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Ubicación (preview)</label>
+                        <input id="vUbicacion" class="form-control" placeholder="Se llena con Estado/Municipio" disabled>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Descripción*</label>
+                        <textarea id="vDescripcion" rows="5" class="form-control" required></textarea>
+                    </div>
+                    <div class="col-12 d-flex gap-2">
+                        <button class="btn btn-success gradient-btn" type="submit" id="btnGuardarVacante">Guardar</button>
+                        <button class="btn btn-outline-light" type="button" id="btnLimpiarVacante">Limpiar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- PANEL RECLUTADOR -->
+        <section id="view-panel" class="view">
+            <div class="box">
+                <h4 class="mb-3">Panel del reclutador</h4>
+
+                <ul class="nav nav-pills mb-3">
+                    <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tabPublicadas">Publicadas</button></li>
+                    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tabBorradas">Borradas</button></li>
+                    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tabPostulaciones">Postulaciones</button></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tabPublicadas">
+                        <div id="panelPublicadas" class="vstack gap-2"></div>
+                    </div>
+
+                    <div class="tab-pane fade" id="tabBorradas">
+                        <div id="panelBorradas" class="vstack gap-2"></div>
+                    </div>
+
+                    <div class="tab-pane fade" id="tabPostulaciones">
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            <input id="appSearch" class="form-control" placeholder="Buscar por puesto/empresa/candidato" style="max-width:340px">
+                            <select id="appEstado" class="form-select" style="max-width:220px">
+                                <option value="">Todos los estados</option>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="aceptado">Aceptado</option>
+                                <option value="rechazado">Rechazado</option>
+                            </select>
+                            <input id="appJobFilter" type="hidden">
+                        </div>
+                        <div id="panelApps" class="vstack gap-2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PERFIL -->
+        <section id="view-perfil" class="view">
+            <div class="box">
+                <h4 class="mb-3">Mi perfil</h4>
+                <div id="perfilInfo"></div>
+                <button class="btn btn-outline-light mt-3" id="btnLogout">Cerrar sesión</button>
+            </div>
+
+            <div class="box mt-3 d-none" id="boxFavoritos">
+                <h5 class="mb-2">Mis favoritos</h5>
+                <div id="listaFavoritos"></div>
+            </div>
+
+            <div class="box mt-3 d-none" id="boxMisPost">
+                <h5 class="mb-2">Mis postulaciones</h5>
+                <div id="listaMisPost"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER GLOBAL -->
+    <footer class="footer-main mt-4">
+        <div class="container text-center small text-secondary py-3">
+            <a href="terminos.html" class="link-light text-decoration-none" target="_blank" rel="noopener noreferrer">
+                Términos y condiciones
+            </a>
+            <span class="mx-2 text-secondary">|</span>
+            <a href="privacidad.html" class="link-light text-decoration-none" target="_blank" rel="noopener noreferrer">
+                Aviso de privacidad
+            </a>
+            <div class="mt-2">
+                LEJA Empleos © 2025. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DETALLE -->
+    <div class="modal fade" id="detalleModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detalleTitulo">Detalle</h5>
+                    <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="detalleContenido"></div>
+                    <div class="mt-3 d-flex gap-2">
+                        <button class="btn btn-primary gradient-btn" id="btnPostularModal">Postularme</button>
+                        <button class="btn btn-outline-light" id="btnFavoritoModal" data-action="fav">★ Favorito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL POSTULAR (cuestionario) -->
+    <div class="modal fade" id="postularModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                    <h5 class="modal-title">Postulación</h5>
+                    <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="frmPostular" class="vstack gap-2">
+                        <input class="form-control" id="pNombre" placeholder="Tu nombre completo*" required>
+                        <div class="row g-2">
+                            <div class="col-md-6"><input class="form-control" id="pCorreo" type="email" placeholder="Correo (opcional)"></div>
+                            <div class="col-md-6"><input class="form-control" id="pTel" type="tel" placeholder="Teléfono (opcional)"></div>
+                        </div>
+                        <textarea class="form-control" id="pMensaje" rows="3" placeholder="Mensaje (mín. 50 caracteres)*" required minlength="50"></textarea>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="pTerminos" required>
+                            <label class="form-check-label small" for="pTerminos">
+                                Acepto los
+                                <a href="terminos.html" class="link-light text-decoration-underline" target="_blank" rel="noopener noreferrer">
+                                    Términos y condiciones
+                                </a>
+                                y el
+                                <a href="privacidad.html" class="link-light text-decoration-underline" target="_blank" rel="noopener noreferrer">
+                                    Aviso de privacidad
+                                </a>
+                                *
+                            </label>
+                        </div>
+                        <button class="btn btn-primary gradient-btn align-self-start" type="submit">Enviar postulación</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Ver / Responder una postulación -->
+    <div class="modal fade" id="appModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                    <h5 class="modal-title">Postulación</h5>
+                    <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="small text-secondary">Puesto</div>
+                            <div class="h6 mb-0" id="amJob"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-secondary">Empresa</div>
+                            <div class="h6 mb-0" id="amCompany"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-secondary">Candidato</div>
+                            <div class="h6 mb-0" id="amCandidate"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-secondary">Contacto</div>
+                            <div class="h6 mb-0" id="amContact"></div>
+                        </div>
+                        <div class="col-12">
+                            <div class="small text-secondary">Fecha</div>
+                            <div class="h6 mb-0" id="amDate"></div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="small text-secondary">Mensaje del candidato</div>
+                            <pre class="mb-0" id="amUserMsg" style="white-space:pre-wrap"></pre>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Estado</label>
+                            <div class="btn-group" role="group" id="amStatusGroup" data-app="">
+                                <button class="btn btn-sm btn-outline-light" data-status="pendiente">Pendiente</button>
+                                <button class="btn btn-sm btn-outline-light" data-status="aceptado">Aceptar</button>
+                                <button class="btn btn-sm btn-outline-light" data-status="rechazado">Rechazar</button>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="d-flex gap-2 align-items-end flex-wrap">
+                                <div>
+                                    <label class="form-label">Plantillas de respuesta</label>
+                                    <select class="form-select form-select-sm" id="amTemplate" style="min-width:260px">
+                                        <option value="">— Selecciona plantilla —</option>
+                                        <option value="Perfil interesante para futuras vacantes.">Perfil interesante para futuro</option>
+                                        <option value="Experiencia insuficiente para los requisitos actuales.">Experiencia insuficiente</option>
+                                        <option value="Horarios/ubicación no compatibles.">Horario no compatible</option>
+                                        <option value="Vacante ocupada. ¡Gracias por tu interés!">Vacante ocupada</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-sm btn-outline-light" id="amInsertTemplate" type="button">Insertar</button>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Mensaje al candidato (motivo / respuesta)</label>
+                            <textarea class="form-control" id="amReply" rows="3" placeholder="Escribe un mensaje para el candidato..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-outline-light" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary gradient-btn" id="btnGuardarRespuesta">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALES: Signup / Login / Reset -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crear cuenta</h5>
+                    <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="frmSignup" class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Rol</label>
+                            <select id="sRol" class="form-select">
+                                <option value="candidato">Candidato</option>
+                                <option value="reclutador">Reclutador</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Correo*</label>
+                            <input id="sCorreo" type="email" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Contraseña (min.8)*</label>
+                            <input id="sPass" type="password" class="form-control" minlength="8" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Empresa (si eres reclutador)</label>
+                            <input id="sEmpresa" class="form-control">
+                        </div>
+                        <div class="col-12 form-check">
+                            <input id="sTerm" type="checkbox" class="form-check-input" required>
+                            <label class="form-check-label small" for="sTerm">
+                                Acepto los
+                                <a href="terminos.html" class="link-light text-decoration-underline" target="_blank" rel="noopener noreferrer">
+                                    Términos y condiciones
+                                </a>
+                                y el
+                                <a href="privacidad.html" class="link-light text-decoration-underline" target="_blank" rel="noopener noreferrer">
+                                    Aviso de privacidad
+                                </a>
+                            </label>
+                        </div>
+                        <div class="col-12 d-flex gap-2">
+                            <button class="btn btn-primary gradient-btn" id="btnCrearCuenta" type="submit">Crear</button>
+                            <button class="btn btn-outline-light" data-bs-target="#loginModal" data-bs-toggle="modal" type="button">Ya tengo cuenta</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                    <h5 class="modal-title">Iniciar sesión</h5>
+                    <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="frmLogin" class="vstack gap-2">
+                        <label>Rol</label>
+                        <select id="lRol" class="form-select">
+                            <option value="candidato">Candidato</option>
+                            <option value="reclutador">Reclutador</option>
+                        </select>
+                        <input id="lCorreo" class="form-control" type="email" placeholder="correo@ejemplo.com" required>
+                        <input id="lPass" class="form-control" type="password" placeholder="Contraseña" required minlength="8">
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-primary gradient-btn mt-1" type="submit">Entrar</button>
+                            <button class="btn btn-link text-light mt-1" type="button" data-bs-toggle="modal" data-bs-target="#resetModal" data-bs-dismiss="modal">¿Olvidaste tu contraseña?</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="resetModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                    <h5 class="modal-title">Restablecer contraseña</h5>
+                    <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="frmReset" class="vstack gap-2">
+                        <input id="rCorreo" class="form-control" type="email" placeholder="Correo con el que te registraste" required>
+                        <input id="rNueva" class="form-control" type="password" placeholder="Nueva contraseña (min. 8)" minlength="8" required>
+                        <button class="btn btn-primary gradient-btn" type="submit">Restablecer (demo)</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="./firebase.js"></script>
+    <script type="module" src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+/* ================== TEMA OSCURO LEJA EMPLEOS ================== */
+:root {
+    --bg: #0e1525; /* fondo general */
+    --panel: #11182a; /* tarjetas / boxes */
+    --border: #1e2943;
+    --text: #e9f0ff;
+    --muted: #a8b3c9;
+}
+
+html,
+body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100%;
+}
+
+/* ================== NAVBAR & LOGO ================== */
+
+.navbar {
+    background-color: #0e1525 !important;
+}
+
+/* El brand se alinea al centro para que la imagen no se baje */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* LOGO de la web */
+.logo-nav {
+    height: 44px; /* tamaño en móvil y general */
+    width: auto;
+    display: block;
+}
+
+/* En pantallas grandes (PC) el logo se ve más grande */
+@media (min-width: 992px) {
+    .logo-nav {
+        height: 80px; /* súbelo o bájalo si lo quieres aún más grande */
+    }
+}
+
+/* Link activo en el menú */
+.navbar .nav-link.active {
+    color: #8da2ff !important;
+}
+
+/* ================== CONTENEDORES GENERALES ================== */
+
+.box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+}
+
+/* Hero de la página de inicio */
+.hero2 {
+    background: linear-gradient(180deg, #0f1628, #0d1220);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+}
+
+/* Inputs del buscador */
+.searchbar .form-control {
+    background: #0b1221;
+    border: 1px solid #1f2a45;
+    color: var(--text);
+}
+
+    .searchbar .form-control::placeholder {
+        color: var(--muted);
+    }
+
+/* ================== BOTONES CON DEGRADADO LEJA ================== */
+
+.gradient-btn,
+.btn-primary.gradient-btn,
+.btn-success.gradient-btn {
+    background-image: linear-gradient(135deg, #19c6e9, #8a3cff); /* azul -> morado */
+    border: none;
+    color: #ffffff;
+}
+
+    .gradient-btn:hover,
+    .btn-primary.gradient-btn:hover,
+    .btn-success.gradient-btn:hover {
+        filter: brightness(1.1);
+        transform: translateY(-1px);
+    }
+
+    .gradient-btn:focus,
+    .btn-primary.gradient-btn:focus,
+    .btn-success.gradient-btn:focus {
+        box-shadow: 0 0 0 0.18rem rgba(137, 60, 255, 0.45);
+        outline: none;
+    }
+
+/* ================== VISTAS SPA ================== */
+
+.view {
+    display: none;
+}
+
+    .view.active {
+        display: block;
+    }
+
+/* ================== TARJETAS DE VACANTES ================== */
+
+.card-job {
+    background: #0f1628;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+}
+
+    .card-job .badge {
+        background: #1b2542;
+        border: 1px solid #2a365a;
+    }
+
+    .card-job .text-secondary.small {
+        opacity: 0.9;
+    }
+
+/* Badges outline */
+.badge-outline {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+}
+
+/* ================== FOOTER ================== */
+
+.footer-main {
+    border-top: 1px solid var(--border);
+    background: #0b111f;
+}
+
+    /* Enlaces del footer */
+    .footer-main a {
+        color: var(--muted);
+    }
+
+        .footer-main a:hover {
+            color: #ffffff;
+        }
+
+/* Links subrayados en textos (si los usas) */
+a.link-light.text-decoration-underline {
+    text-underline-offset: 2px;
+}
